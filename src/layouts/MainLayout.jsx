@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   AppBar,
   Box,
-  Container,
   Toolbar,
   Typography,
   Menu,
@@ -43,9 +42,12 @@ const MainLayout = ({ children }) => {
     navigate('/bookings');
   };
 
-  const handleNav = (path) => {
+  const handleNav = (href) => {
     setDrawerOpen(false);
-    navigate(path);
+    const target = document.getElementById(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -77,63 +79,35 @@ const MainLayout = ({ children }) => {
               width: 'auto',
               objectFit: 'contain',
               cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
             }}
             onClick={() => navigate('/home')}
           />
 
           {!isMobile && (
             <Box display="flex" gap={4}>
-              <Typography
-                variant="body2"
-                sx={{
-                  cursor: 'pointer',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-                onClick={() => navigate('/')}
-              >
-                Home
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  cursor: 'pointer',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-                onClick={() => navigate('/#deals')}
-              >
-                Deals
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  cursor: 'pointer',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-                onClick={() => navigate('/#destinations')}
-              >
-                Destinations
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  cursor: 'pointer',
-                  '&:hover': {
-                    textDecoration: 'underline',
-                  },
-                }}
-                onClick={() => navigate('/#supports')}
-              >
-                Supports
-              </Typography>
+              {[
+                { label: 'Home', href: '#home' },
+                { label: 'Deals', href: '#deals' },
+                { label: 'Destinations', href: '#destinations' },
+                { label: 'Supports', href: '#supports' },
+              ].map(({ label, href }) => (
+                <Typography
+                  key={label}
+                  variant="body2"
+                  component="a"
+                  href={href}
+                  sx={{
+                    cursor: 'pointer',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                >
+                  {label}
+                </Typography>
+              ))}
             </Box>
           )}
 
@@ -154,18 +128,21 @@ const MainLayout = ({ children }) => {
                 >
                   <Box width={200} role="presentation" p={2}>
                     <List>
-                      <ListItem button onClick={() => handleNav('/')}>
-                        <ListItemText primary="Home" />
-                      </ListItem>
-                      <ListItem button onClick={() => handleNav('/#deals')}>
-                        <ListItemText primary="Deals" />
-                      </ListItem>
-                      <ListItem
-                        button
-                        onClick={() => handleNav('/#destinations')}
-                      >
-                        <ListItemText primary="Destinations" />
-                      </ListItem>
+                      {[
+                        { label: 'Home', href: 'home' },
+                        { label: 'Deals', href: 'deals' },
+                        { label: 'Destinations', href: 'destinations' },
+                        { label: 'Supports', href: 'supports' },
+                      ].map(({ label, href }) => (
+                        <ListItem
+                          key={label}
+                          component="a"
+                          href={`#${href}`}
+                          onClick={() => handleNav(href)}
+                        >
+                          <ListItemText primary={label} />
+                        </ListItem>
+                      ))}
                     </List>
                   </Box>
                 </Drawer>
@@ -192,7 +169,7 @@ const MainLayout = ({ children }) => {
         </Toolbar>
       </AppBar>
 
-      <Box component="main" flex={1}>
+      <Box component="main" flex={1} sx={{ pt: '50px' }}>
         {children}
       </Box>
 
