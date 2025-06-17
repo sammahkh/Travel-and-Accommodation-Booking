@@ -1,11 +1,13 @@
-import LogoutButton from '../components/Auth/LogoutButton';
+import MainLayout from '../layouts/MainLayout';
+import HeroCarousel from '../components/Home/HeroCarousel';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to the User Home Page</h1>
-      <LogoutButton />
-    </div>
+    <>
+      <MainLayout>
+        <HeroCarousel />
+      </MainLayout>
+    </>
   );
 };
 
