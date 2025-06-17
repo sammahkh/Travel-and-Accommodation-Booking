@@ -30,9 +30,15 @@ const TrendingDestinations = () => {
 
   return (
     <SectionWrapper title="Trending Destinations" centerTitle>
-      <Grid container spacing={3} justifyContent="center" id="destinations">
+      <Grid
+        container
+        spacing={6}
+        justifyContent="center"
+        sx={{ maxWidth: '1200PX', margin: '0 auto' }}
+        id="destinations"
+      >
         {destinations.map((dest) => (
-          <Grid item key={dest.cityId} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={dest.cityId} xs={12} sm={6} md={4} lg={4}>
             <DestinationCard
               cityName={dest.cityName}
               image={dest.thumbnailUrl}
