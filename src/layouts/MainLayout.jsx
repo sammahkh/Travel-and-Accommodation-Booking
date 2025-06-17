@@ -179,9 +179,10 @@ const MainLayout = ({ children }) => {
           py: 2,
           textAlign: 'center',
           mt: 'auto',
+          backgroundColor: '#6b9080',
         }}
       >
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="#f6fff8">
           © 2025 BookNGo. All rights reserved.
         </Typography>
       </Box>
