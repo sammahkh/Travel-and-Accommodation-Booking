@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "jwt-decode": "4.0.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "formik": "^2.4.2",

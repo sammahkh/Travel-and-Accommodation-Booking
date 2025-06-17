@@ -6,21 +6,26 @@ import {
   Box,
   Rating,
 } from '@mui/material';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DEFAULT_IMG from '../../assets/images/fallback_hotel.jpg';
 
 const HotelCard = ({
   name,
   price,
   discountedPrice,
   location,
-  rating,
+  rating = 0,
   image,
   hotelId,
 }) => {
   const navigate = useNavigate();
+  const [imgSrc, setImgSrc] = useState(image || DEFAULT_IMG);
 
   const handleCardClick = () => {
-    navigate(`/hotels/${hotelId}`);
+    if (hotelId) {
+      navigate(`/hotels/${hotelId}`);
+    }
   };
 
   return (
@@ -41,8 +46,12 @@ const HotelCard = ({
       <CardMedia
         component="img"
         height="180"
-        image={image}
+        image={imgSrc}
         alt={name}
+        onError={(e) => {
+          e.target.onerror = null;
+          setImgSrc(DEFAULT_IMG);
+        }}
         sx={{ objectFit: 'cover' }}
       />
 
