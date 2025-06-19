@@ -1,10 +1,13 @@
 import { Box, Grid } from '@mui/material';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 import InputField from '../../components/Form/InputField';
 import LoadingButton from '../../components/Button/LoadingButton';
 
 const SearchBar = () => {
+  const navigate = useNavigate();
+
   const today = new Date().toISOString().split('T')[0];
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
 
@@ -17,8 +20,24 @@ const SearchBar = () => {
       children: 0,
       rooms: 1,
     },
-    onSubmit: (values) => {
-      console.log('Search triggered with:', values);
+    onSubmit: async (values, actions) => {
+      const params = {
+        city: values.query,
+        checkInDate: values.checkIn,
+        checkOutDate: values.checkOut,
+        adults: values.adults,
+        children: values.children,
+        numberOfRooms: values.rooms,
+      };
+
+      try {
+        const queryString = new URLSearchParams(params).toString();
+        navigate(`/search-results?${queryString}`);
+      } catch (err) {
+        console.error('Failed to fetch search results', err);
+      } finally {
+        actions.setSubmitting(false);
+      }
     },
   });
 
