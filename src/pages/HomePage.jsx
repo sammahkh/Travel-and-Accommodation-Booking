@@ -11,7 +11,7 @@ const HomePage = () => {
   const userId = user?.user_id;
   return (
     <>
-      <MainLayout>
+      <MainLayout showNavLinks={true}>
         <HeroCarousel />
         <FeaturedDeals />
         <RecentlyVisited userId={userId} />

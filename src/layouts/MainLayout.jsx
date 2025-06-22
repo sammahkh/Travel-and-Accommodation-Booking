@@ -8,9 +8,6 @@ import {
   MenuItem,
   IconButton,
   Drawer,
-  List,
-  ListItem,
-  ListItemText,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
@@ -19,8 +16,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LogoutButton from '../components/Auth/LogoutButton';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo.jpg';
+import NavList from './NavList';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, showNavLinks = true }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -83,36 +81,14 @@ const MainLayout = ({ children }) => {
             onClick={() => navigate('/home')}
           />
 
-          {!isMobile && (
+          {!isMobile && showNavLinks && (
             <Box display="flex" gap={4}>
-              {[
-                { label: 'Home', href: '#home' },
-                { label: 'Deals', href: '#deals' },
-                { label: 'Destinations', href: '#destinations' },
-                { label: 'Supports', href: '#supports' },
-              ].map(({ label, href }) => (
-                <Typography
-                  key={label}
-                  variant="body2"
-                  component="a"
-                  href={href}
-                  sx={{
-                    cursor: 'pointer',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      textDecoration: 'underline',
-                    },
-                  }}
-                >
-                  {label}
-                </Typography>
-              ))}
+              <NavList direction="row" onItemClick={handleNav} />
             </Box>
           )}
 
           <Box display="flex" alignItems="center" gap={1}>
-            {isMobile && (
+            {isMobile && showNavLinks && (
               <>
                 <IconButton
                   onClick={() => setDrawerOpen(true)}
@@ -127,23 +103,7 @@ const MainLayout = ({ children }) => {
                   onClose={() => setDrawerOpen(false)}
                 >
                   <Box width={200} role="presentation" p={2}>
-                    <List>
-                      {[
-                        { label: 'Home', href: 'home' },
-                        { label: 'Deals', href: 'deals' },
-                        { label: 'Destinations', href: 'destinations' },
-                        { label: 'Supports', href: 'supports' },
-                      ].map(({ label, href }) => (
-                        <ListItem
-                          key={label}
-                          component="a"
-                          href={`#${href}`}
-                          onClick={() => handleNav(href)}
-                        >
-                          <ListItemText primary={label} />
-                        </ListItem>
-                      ))}
-                    </List>
+                    <NavList direction="column" onItemClick={handleNav} />
                   </Box>
                 </Drawer>
               </>
@@ -169,7 +129,7 @@ const MainLayout = ({ children }) => {
         </Toolbar>
       </AppBar>
 
-      <Box component="main" flex={1} sx={{ pt: '50px' }}>
+      <Box component="main" flex={1} sx={{ pt: '60px' }}>
         {children}
       </Box>
 
