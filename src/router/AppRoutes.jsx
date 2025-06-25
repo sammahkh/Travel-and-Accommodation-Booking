@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage';
 import ProtectedRoute from '../components/Auth/ProtectedRoute';
 import SearchResultsPage from '../pages/SearchResultsPage';
+import HotelPage from '../pages/HotelPage';
 import UnauthorizedPage from '../pages/UnauthorizedPage';
 
 const AppRoutes = () => {
@@ -30,6 +31,7 @@ const AppRoutes = () => {
           }
         />
         <Route path="/search-results" element={<SearchResultsPage />} />
+        <Route path="/hotels/:hotelId" element={<HotelPage />} />
 
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
