@@ -5,12 +5,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
 import App from './App.jsx';
 import './index.css';
+import { CartProvider } from './context/CartContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </ThemeProvider>
   </StrictMode>
 );

@@ -35,9 +35,9 @@ const MainLayout = ({ children, showNavLinks = true }) => {
     navigate('/settings');
   };
 
-  const handleBookings = () => {
+  const handleCheckout = () => {
     handleMenuClose();
-    navigate('/bookings');
+    navigate('/checkout');
   };
 
   const handleNav = (href) => {
@@ -120,8 +120,8 @@ const MainLayout = ({ children, showNavLinks = true }) => {
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
+              <MenuItem onClick={handleCheckout}>My Cart</MenuItem>
               <MenuItem onClick={handleSettings}>Settings</MenuItem>
-              <MenuItem onClick={handleBookings}>My Bookings</MenuItem>
             </Menu>
 
             <LogoutButton />
