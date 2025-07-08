@@ -1,19 +1,21 @@
 import { useParams } from 'react-router-dom';
-import { CircularProgress, Alert, Container, Typography } from '@mui/material';
+import {
+  CircularProgress,
+  Alert,
+  Container,
+  Typography,
+  Snackbar,
+} from '@mui/material';
 import { useState } from 'react';
-
 import useHotelDetails from '../hooks/useHotelDetails';
-// import useHotelGallery from '../hooks/useHotelGallery';
-
+import useHotelRooms from '../hooks/useHotelRooms';
 import MainLayout from '../layouts/MainLayout';
 import HotelHeader from '../components/Hotel/HotelHeader';
-// import HotelGallery from '../components/Hotel/HotelGallery';
 import HotelMap from '../components/Hotel/HotelMap';
-
-import useHotelRooms from '../hooks/useHotelRooms';
 import RoomList from '../components/Hotel/RoomList';
 import RoomFilterForm from '../components/Hotel/RoomFilterForm';
-
+// import HotelGallery from '../components/Hotel/HotelGallery';
+// import useHotelGallery from '../hooks/useHotelGallery';
 const HotelPage = () => {
   const { hotelId } = useParams();
   console.log(hotelId);
@@ -22,6 +24,7 @@ const HotelPage = () => {
 
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const {
     rooms,
@@ -41,6 +44,7 @@ const HotelPage = () => {
       </MainLayout>
     );
   }
+
   if (error) {
     return (
       <MainLayout showNavLinks={false}>
@@ -66,7 +70,19 @@ const HotelPage = () => {
 
         <RoomList
           rooms={rooms}
+          loading={roomLoading}
+          error={roomError}
           isAvailableList={!!checkInDate && !!checkOutDate}
+          hotelName={hotel.hotelName}
+          onAddToCart={() => setSnackbarOpen(true)}
+        />
+
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={() => setSnackbarOpen(false)}
+          message="Room added to cart"
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         />
       </Container>
     </MainLayout>
