@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
-import AdminPage from '../pages/AdminPage';
+import AdminDashboard from '../pages/AdminDashboard';
 import ProtectedRoute from '../components/Auth/ProtectedRoute';
 import SearchResultsPage from '../pages/SearchResultsPage';
 import HotelPage from '../pages/HotelPage';
@@ -28,7 +28,7 @@ const AppRoutes = () => {
           path="/admin"
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminPage />
+              <AdminDashboard />
             </ProtectedRoute>
           }
         />
