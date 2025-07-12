@@ -12,9 +12,11 @@ import {
   DialogActions,
   Snackbar,
 } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import AdminLayout from '../layouts/AdminLayout';
 import AdminSearchBar from '../components/Admin/AdminSearchbar';
 import CitiesTable from '../components/Admin/CitiesTable';
+import CityFormDrawer from '../components/Admin/CityFormDrawer';
 import { fetchCities, deleteCity } from '../services/citiesService';
 
 const CitiesPage = () => {
@@ -24,6 +26,8 @@ const CitiesPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [deleteId, setDeleteId] = useState(null);
   const [successAlert, setSuccessAlert] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [editCity, setEditCity] = useState(null);
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
@@ -59,6 +63,24 @@ const CitiesPage = () => {
     }
   };
 
+  const handleSave = (cityData) => {
+    if (cityData.id) {
+      setCities((prev) =>
+        prev.map((c) => (c.id === cityData.id ? { ...c, ...cityData } : c))
+      );
+    } else {
+      const newCity = {
+        ...cityData,
+        id: Math.floor(Math.random() * 10000),
+      };
+      setCities((prev) => [newCity, ...prev]);
+    }
+
+    setDrawerOpen(false);
+    setEditCity(null);
+    setSuccessAlert(true);
+  };
+
   return (
     <AdminLayout>
       <Container maxWidth="lg">
@@ -71,6 +93,16 @@ const CitiesPage = () => {
           <Typography variant="h5" fontWeight="bold">
             Manage Cities
           </Typography>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => {
+              setEditCity(null);
+              setDrawerOpen(true);
+            }}
+          >
+            Add City
+          </Button>
         </Box>
 
         <AdminSearchBar onSearch={handleSearch} />
@@ -80,7 +112,14 @@ const CitiesPage = () => {
         ) : error ? (
           <Alert severity="error">{error}</Alert>
         ) : (
-          <CitiesTable cities={cities} onDelete={(id) => setDeleteId(id)} />
+          <CitiesTable
+            cities={cities}
+            onDelete={(id) => setDeleteId(id)}
+            onEdit={(city) => {
+              setEditCity(city);
+              setDrawerOpen(true);
+            }}
+          />
         )}
 
         <Dialog open={Boolean(deleteId)} onClose={() => setDeleteId(null)}>
@@ -100,12 +139,16 @@ const CitiesPage = () => {
           open={successAlert}
           autoHideDuration={3000}
           onClose={() => setSuccessAlert(false)}
+          message="Operation completed successfully!"
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-          <Alert severity="success" sx={{ width: '100%' }}>
-            City deleted successfully!
-          </Alert>
-        </Snackbar>
+        />
+
+        <CityFormDrawer
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          onSubmit={handleSave}
+          initialValues={editCity}
+        />
       </Container>
     </AdminLayout>
   );
