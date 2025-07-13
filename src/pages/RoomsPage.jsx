@@ -11,10 +11,13 @@ import {
   DialogActions,
   Button,
   Snackbar,
+  Fab,
 } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import AdminLayout from '../layouts/AdminLayout';
 import AdminSearchBar from '../components/Admin/AdminSearchbar';
 import RoomsTable from '../components/Admin/RoomsTable';
+import RoomFormDrawer from '../components/Admin/RoomFormDrawer';
 import { fetchRooms } from '../services/roomsService';
 
 const RoomsPage = () => {
@@ -24,6 +27,8 @@ const RoomsPage = () => {
   const [error, setError] = useState('');
   const [snackOpen, setSnackOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [editRoom, setEditRoom] = useState(null);
 
   const handleSearch = (query) => setSearchQuery(query.toLowerCase());
 
@@ -60,6 +65,22 @@ const RoomsPage = () => {
     setDeleteId(null);
   };
 
+  const handleFormSubmit = (room) => {
+    if (editRoom) {
+      setRooms((prev) =>
+        prev.map((r) =>
+          r.roomId === editRoom.roomId ? { ...room, roomId: r.roomId } : r
+        )
+      );
+    } else {
+      const newRoom = { ...room, roomId: Date.now() };
+      setRooms((prev) => [...prev, newRoom]);
+    }
+    setDrawerOpen(false);
+    setEditRoom(null);
+    setSnackOpen(true);
+  };
+
   return (
     <AdminLayout>
       <Container maxWidth="lg">
@@ -72,6 +93,14 @@ const RoomsPage = () => {
           <Typography variant="h5" fontWeight="bold">
             Manage Rooms
           </Typography>
+
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => setDrawerOpen(true)}
+          >
+            Add Room
+          </Button>
         </Box>
 
         <AdminSearchBar onSearch={handleSearch} />
@@ -81,7 +110,14 @@ const RoomsPage = () => {
         ) : error ? (
           <Alert severity="error">{error}</Alert>
         ) : (
-          <RoomsTable rooms={rooms} onDelete={(id) => setDeleteId(id)} />
+          <RoomsTable
+            rooms={rooms}
+            onDelete={(id) => setDeleteId(id)}
+            onEdit={(room) => {
+              setEditRoom(room);
+              setDrawerOpen(true);
+            }}
+          />
         )}
 
         <Dialog open={Boolean(deleteId)} onClose={() => setDeleteId(null)}>
@@ -97,11 +133,21 @@ const RoomsPage = () => {
           </DialogActions>
         </Dialog>
 
+        <RoomFormDrawer
+          open={drawerOpen}
+          onClose={() => {
+            setDrawerOpen(false);
+            setEditRoom(null);
+          }}
+          initialValues={editRoom}
+          onSubmit={handleFormSubmit}
+        />
+
         <Snackbar
           open={snackOpen}
           autoHideDuration={3000}
           onClose={() => setSnackOpen(false)}
-          message="Room deleted successfully"
+          message=" Operation completed successfully"
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         />
       </Container>

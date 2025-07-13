@@ -19,7 +19,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
 
-const RoomsTable = ({ rooms, onDelete }) => {
+const RoomsTable = ({ rooms, onDelete, onEdit }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -28,7 +28,13 @@ const RoomsTable = ({ rooms, onDelete }) => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
-
+  if (!rooms || rooms.length === 0) {
+    return (
+      <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+        No results found.
+      </Typography>
+    );
+  }
   const paginated = rooms.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
@@ -86,7 +92,11 @@ const RoomsTable = ({ rooms, onDelete }) => {
                 <TableCell align="right">
                   <Box display="flex" justifyContent="flex-end" gap={1}>
                     <Tooltip title="Edit">
-                      <IconButton size="small" color="primary">
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        onClick={() => onEdit(room)}
+                      >
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
