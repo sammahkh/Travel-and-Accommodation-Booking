@@ -8,6 +8,7 @@ import {
   Paper,
   IconButton,
   Tooltip,
+  Typography,
   TablePagination,
   Box,
   Avatar,
@@ -16,7 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 
-const HotelsTable = ({ hotels, onDelete }) => {
+const HotelsTable = ({ hotels, onDelete, onEdit }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -25,6 +26,14 @@ const HotelsTable = ({ hotels, onDelete }) => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setPage(0);
   };
+
+  if (!hotels || hotels.length === 0) {
+    return (
+      <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+        No results found.
+      </Typography>
+    );
+  }
 
   const paginated = hotels.slice(
     page * rowsPerPage,
@@ -67,7 +76,11 @@ const HotelsTable = ({ hotels, onDelete }) => {
                 <TableCell align="right">
                   <Box display="flex" justifyContent="flex-end" gap={1}>
                     <Tooltip title="Edit">
-                      <IconButton color="primary" size="small">
+                      <IconButton
+                        color="primary"
+                        size="small"
+                        onClick={() => onEdit(hotel)}
+                      >
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
