@@ -1,7 +1,12 @@
 import { Grid, Typography } from '@mui/material';
 import RoomCard from './RoomCard';
 
-const RoomList = ({ rooms, isAvailableList = false }) => {
+const RoomList = ({
+  rooms,
+  isAvailableList = false,
+  hotelName,
+  onAddToCart,
+}) => {
   if (!rooms || rooms.length === 0) {
     return (
       <Typography textAlign="center" mt={4}>
@@ -14,7 +19,12 @@ const RoomList = ({ rooms, isAvailableList = false }) => {
     <Grid container spacing={3} mt={5}>
       {rooms.map((room) => (
         <Grid key={room.roomId} item xs={12} sm={6} md={4}>
-          <RoomCard room={room} showAddToCart={isAvailableList} />
+          <RoomCard
+            room={room}
+            showAddToCart={isAvailableList}
+            hotelName={hotelName}
+            onAddToCart={onAddToCart}
+          />
         </Grid>
       ))}
     </Grid>

@@ -6,6 +6,7 @@ import ProtectedRoute from '../components/Auth/ProtectedRoute';
 import SearchResultsPage from '../pages/SearchResultsPage';
 import HotelPage from '../pages/HotelPage';
 import UnauthorizedPage from '../pages/UnauthorizedPage';
+import CheckoutPage from '../pages/CheckoutPage';
 
 const AppRoutes = () => {
   return (
@@ -32,6 +33,7 @@ const AppRoutes = () => {
         />
         <Route path="/search-results" element={<SearchResultsPage />} />
         <Route path="/hotels/:hotelId" element={<HotelPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
 
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 

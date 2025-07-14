@@ -7,6 +7,7 @@ const LogoutButton = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userType');
+    localStorage.removeItem('cartItems');
     navigate('/login');
   };
 
