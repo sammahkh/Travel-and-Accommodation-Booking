@@ -7,6 +7,7 @@ import SearchResultsPage from '../pages/SearchResultsPage';
 import HotelPage from '../pages/HotelPage';
 import UnauthorizedPage from '../pages/UnauthorizedPage';
 import CheckoutPage from '../pages/CheckoutPage';
+import ConfirmationPage from '../pages/ConfirmationPage';
 
 const AppRoutes = () => {
   return (
@@ -34,6 +35,7 @@ const AppRoutes = () => {
         <Route path="/search-results" element={<SearchResultsPage />} />
         <Route path="/hotels/:hotelId" element={<HotelPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/confirmation" element={<ConfirmationPage />} />
 
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
