@@ -2,9 +2,10 @@
 
 A responsive travel and hotel booking platform built with **React**, **JavaScript**, and **Material UI**.
 
- **Live App**: [Click here](https://travel-and-accommodation-booking-85n3.onrender.com)
+ [**Live App**](https://travel-and-accommodation-booking-85n3.onrender.com)
 
 Users can  explore, search, and reserve hotel accommodations seamlessly.
+
 Admins have full control over managing cities, hotels, and rooms.
 
 
@@ -76,6 +77,7 @@ Filter hotels by:
 git clone https://github.com/sammahkh/Travel-and-Accommodation-Booking.git
 npm install
 ```
+
 ### Run the App
 
 ```bash
@@ -88,10 +90,12 @@ This project uses Vitest and React Testing Library.
 ```bash
 npm run test
 ```
+
 ##  Management Tools Used
 - [Trello](https://trello.com/invite/b/684f1670cf6ce4af0f1fe095/ATTI91a5ee19ac5873c92a89bdeed1886efa9A97DA07/travel-and-accommodation-booking-foothill) for task management and project planning
 
 ##  Author
 Developed with ❤️ by **Samah Bani Odeh**
+
 Final Project – Internship @ [Foothill Technology Solutions](https://www.foothillsolutions.com/)
 
