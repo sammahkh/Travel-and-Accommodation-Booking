@@ -18,9 +18,9 @@ const LogoutButton = () => {
         fontSize: '0.95rem',
         fontWeight: 500,
         padding: '6px 18px',
-        backgroundColor: '#eaf4f4',
+        backgroundColor: '#f6fff8',
         '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          backgroundColor: '#eaf4f4',
           borderColor: '#ffffff',
         },
       }}
