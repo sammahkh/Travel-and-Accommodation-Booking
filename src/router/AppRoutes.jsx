@@ -3,6 +3,7 @@ import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
 import AdminPage from '../pages/AdminPage';
 import ProtectedRoute from '../components/Auth/ProtectedRoute';
+import SearchResultsPage from '../pages/SearchResultsPage';
 import UnauthorizedPage from '../pages/UnauthorizedPage';
 
 const AppRoutes = () => {
@@ -28,6 +29,8 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/search-results" element={<SearchResultsPage />} />
+
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         <Route path="*" element={<LoginPage />} />
