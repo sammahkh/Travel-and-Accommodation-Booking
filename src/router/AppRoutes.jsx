@@ -11,6 +11,7 @@ import ConfirmationPage from '../pages/ConfirmationPage';
 import CitiesPage from '../pages/CitiesPage';
 import HotelsPage from '../pages/HotelsPage';
 import RoomsPage from '../pages/RoomsPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,42 @@ const AppRoutes = () => {
         />
 
         <Route
+          path="/search-results"
+          element={
+            <ProtectedRoute allowedRoles={['User']}>
+              <SearchResultsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/hotels/:hotelId"
+          element={
+            <ProtectedRoute allowedRoles={['User']}>
+              <HotelPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute allowedRoles={['User']}>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/confirmation"
+          element={
+            <ProtectedRoute allowedRoles={['User']}>
+              <ConfirmationPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/admin"
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
@@ -35,17 +72,36 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/search-results" element={<SearchResultsPage />} />
-        <Route path="/hotels/:hotelId" element={<HotelPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/confirmation" element={<ConfirmationPage />} />
-        <Route path="/admin/cities" element={<CitiesPage />} />
-        <Route path="/admin/hotels" element={<HotelsPage />} />
-        <Route path="/admin/rooms" element={<RoomsPage />} />
+
+        <Route
+          path="/admin/cities"
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <CitiesPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/hotels"
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <HotelsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/rooms"
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <RoomsPage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
-
-        <Route path="*" element={<LoginPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );
