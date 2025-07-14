@@ -75,6 +75,7 @@ Filter hotels by:
 
 ```bash
 git clone https://github.com/sammahkh/Travel-and-Accommodation-Booking.git
+cd Travel-and-Accommodation-Booking
 npm install
 ```
 
@@ -85,10 +86,10 @@ npm run dev
 ```
 
 ### Testing
-This project uses Vitest and React Testing Library.
+Unit testing using @testing-library/react and vitest:
 
 ```bash
-npm run test
+npx vitest
 ```
 
 ##  Management Tools Used
