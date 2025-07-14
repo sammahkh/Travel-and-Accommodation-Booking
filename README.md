@@ -15,7 +15,7 @@ Admins have full control over managing cities, hotels, and rooms.
 -  **Accommodation listing and booking functionality**
 -  **Date pickers** for flexible travel planning
 -  **Clean UI** built with Material UI
--  **Data fetching** using React Query and Axios
+-  **Data fetching** using Axios
 -  **Form management** with Formik + Yup
 -  Fully **responsive** and **mobile-friendly**
 
