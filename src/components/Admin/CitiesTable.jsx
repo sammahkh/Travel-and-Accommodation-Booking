@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
 
-const CitiesTable = ({ cities, onDelete }) => {
+const CitiesTable = ({ cities, onDelete, onEdit }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -60,7 +60,11 @@ const CitiesTable = ({ cities, onDelete }) => {
                 <TableCell align="right">
                   <Box display="flex" justifyContent="flex-end" gap={1}>
                     <Tooltip title="Edit">
-                      <IconButton color="primary" size="small">
+                      <IconButton
+                        color="primary"
+                        size="small"
+                        onClick={() => onEdit(city)}
+                      >
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
