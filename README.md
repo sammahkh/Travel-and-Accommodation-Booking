@@ -7,7 +7,7 @@ A responsive travel and hotel booking platform built with **React**, **JavaScrip
 Users can  explore, search, and reserve hotel accommodations seamlessly.
 Admins have full control over managing cities, hotels, and rooms.
 
----
+
 
 ## Features
 
@@ -18,7 +18,7 @@ Admins have full control over managing cities, hotels, and rooms.
 -  **Form management** with Formik + Yup
 -  Fully **responsive** and **mobile-friendly**
 
----
+
 
 ## User Roles & Access
 
@@ -54,7 +54,7 @@ Filter hotels by:
 - Add or remove rooms
 - View booking summary and download as PDF
 
----
+
 
 ##  Login Credentials 
 
@@ -66,7 +66,7 @@ Filter hotels by:
 - Username: `admin`  
 - Password: `admin`
 
----
+
 
 ##  Getting Started
 
@@ -75,23 +75,23 @@ Filter hotels by:
 ```bash
 git clone https://github.com/sammahkh/Travel-and-Accommodation-Booking.git
 npm install
-
+```
 ### Run the App
 
 ```bash
 npm run dev
-
+```
 
 ### Testing
 This project uses Vitest and React Testing Library.
 
 ```bash
 npm run test
----
+```
 ##  Management Tools Used
 - [Trello](https://trello.com/invite/b/684f1670cf6ce4af0f1fe095/ATTI91a5ee19ac5873c92a89bdeed1886efa9A97DA07/travel-and-accommodation-booking-foothill) for task management and project planning
----
+
 ##  Author
-Developed with ❤️ by `Samah Bani Odeh`
+Developed with ❤️ by **Samah Bani Odeh**
 Final Project – Internship @ [Foothill Technology Solutions](https://www.foothillsolutions.com/)
 
