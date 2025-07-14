@@ -9,6 +9,7 @@ import UnauthorizedPage from '../pages/UnauthorizedPage';
 import CheckoutPage from '../pages/CheckoutPage';
 import ConfirmationPage from '../pages/ConfirmationPage';
 import CitiesPage from '../pages/CitiesPage';
+import HotelsPage from '../pages/HotelsPage';
 
 const AppRoutes = () => {
   return (
@@ -38,6 +39,8 @@ const AppRoutes = () => {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/admin/cities" element={<CitiesPage />} />
+        <Route path="/admin/hotels" element={<HotelsPage />} />
+
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         <Route path="*" element={<LoginPage />} />
